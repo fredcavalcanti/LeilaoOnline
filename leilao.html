@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<title>Experimento Leilão</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="shortcut icon" type="image/x-icon" href="dist/images/icone.jpg" />
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+
+	<div class="bg-contact2" style="background-image: url('images/bg-01.jpg');">
+		<div class="container-contact2">
+			<div class="wrap-contact2">
+				<label style="float: right;"><b>Seu Saldo</b>: <span id="saldoId" style="color: red"></span></label>
+			  	<label style="float: left;"><b>Lance mínimo</b>: <span id="minId" style="color: red"></span></label>
+			  	<br><br>
+			  	<center>
+		            <div class="col-md-12 mb-5">
+						<img id="imagemId" style="width: 15%;height: 15%" src="dist/images/loading.gif">
+						<h3 id="itemName" class="mb-4"></h3>
+						<!--<div class="progress">
+						  <div class="progress-bar bg-danger" id="progressBar" role="progressbar" style="width: 0%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="30"></div>
+						</div>
+						<small id="emailHelp" class="form-text text-muted">Tempo Restante: <span id="timer"></span></small>-->
+						<p><h5>Especificações</h5>
+							<span id="espId"></span>
+						</p>
+						<div>
+							<b>Lance:</b>
+						</div>
+						<br>
+						<div class="input-group mb-3 col-md-5">
+						  <div class="wrap-input2 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+						<input class="input2" type="text" id="lanceId">
+						<span class="focus-input2" data-placeholder="R$"></span>
+					</div>
+						</div>
+		            </div>
+		            </center>
+
+					<div class="container-contact2-form-btn">
+						<div class="wrap-contact2-form-btn">
+							<div class="contact2-form-bgbtn"></div>
+							<a href="javascript:regLance();" class="contact2-form-btn" id="nextPage">
+								Avançar
+							</a>
+						</div>
+					</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-23581568-13');
+	</script>
+	<script src="js/bootbox.all.min.js"></script>
+	<script type="text/javascript">
+	      	var saldo = document.getElementById('saldoId');
+	      	var minimo = document.getElementById('minId');
+	      	var img = document.getElementById('imagemId');
+	      	var nome = document.getElementById('itemName');
+	      	var especificacoes = document.getElementById('espId');
+	      	var lance = document.getElementById('lanceId');
+	      	var url = location.href;
+      		var parametrosDaUrl = url.split("?")[1];
+      		var listaDeParametros = parametrosDaUrl.split("&");
+      		var chave = (listaDeParametros[0]).split("=");
+      		var itemLeilao = 1;
+      		var valorMinimo;
+      		var valorMaximo;
+      		var downloadTimer;
+      		var timeleft = 30;
+      		const btn = document.getElementById('nextPage');
+      		var tempoInicio;
+      		var tempoFinal;
+
+	      	$(document).ready(function() {
+	      		fetch(`https://us-central1-leilaouff.cloudfunctions.net/app/leilao?userID=${chave[1]}&item=${itemLeilao}`)
+					  .then(function(response){
+					    response.json().then(function(data){
+					    	saldo.innerText = `R$ ${data.caixa},00`;
+					    	minimo.innerText = `R$ ${data.min},00`;
+					    	valorMinimo = parseInt((data.min).split(".").join(""));
+					    	valorMaximo = parseInt((data.caixa).split(".").join(""));
+					    	img.setAttribute('src', `${data.link}`);
+					    	img.style.width = "40%";
+					    	img.style.height = "40%";
+					    	nome.innerText = data.item;
+					    	especificacoes.innerText = data.esp;
+					    	tempoInicio = new Date().getTime();
+
+					    	/*downloadTimer = setInterval(function(){
+							  document.getElementById("progressBar").style.width = `${(30 - timeleft)*3.3}%`;
+							  document.getElementById("timer").innerText = timeleft;
+							  timeleft -= 1;
+							  if(timeleft <= 0)
+							    clearInterval(downloadTimer);
+								check();
+							}, 1000);*/
+					    					      
+					    });
+					  })
+					  .catch(function(err){
+					    bootbox.alert({
+						    message: "Falha ao enviar dados ao servidor, tente novamente.",
+						    backdrop: true
+						});
+					  });
+			});
+
+
+			function regLance()
+			{
+				if(lance.value)
+				{
+					var valorV  = lance.value;
+					var krop2 = valorV.replace(/[^0-9]/g,'');
+					var valorCerto = parseInt(krop2)/100;
+					tempoFinal = new Date().getTime();
+					if(valorCerto < valorMinimo)
+					{
+						 bootbox.alert({
+							    message: "Por Favor entre com um valor maior ou igual ao lance mínimo.",
+							    backdrop: true
+							});
+					}
+					else if( valorCerto > valorMaximo)
+					{
+						bootbox.alert({
+							    message: "Por Favor entre com um valor menor que seu caixa.",
+							    backdrop: true
+							});
+					}
+					else
+					{
+						var newValue = lance.value
+						var k = newValue.replace(/[^\d]+/g,'');
+						var tempoTotal = tempoFinal - tempoInicio;
+						//console.log(tempoTotal);
+						fetch(`https://us-central1-leilaouff.cloudfunctions.net/app/registro?userID=${chave[1]}&item=${itemLeilao}&valor=${k/100	}&tempo=${tempoTotal}`)
+						  .then(function(response){
+						    response.json().then(function(data){
+						    		clearInterval(downloadTimer);
+						    		itemLeilao++;
+						    		lance.value = '' ;
+						    		timeleft = 30;
+						    		refresh();
+						    					      
+						    });
+						  })
+						  .catch(function(err){
+						    bootbox.alert({
+							    message: "Falha ao enviar dados ao servidor, tente novamente.",
+							    backdrop: true
+							});
+						  });
+					}
+				}
+				else
+				{
+					bootbox.alert({
+							    message: "Por Favor entre com um valor.",
+							    backdrop: true
+							});
+				}
+			}
+
+			function refresh(){
+				if(itemLeilao <= 3)
+				{
+					fetch(`https://us-central1-leilaouff.cloudfunctions.net/app/leilao?userID=${chave[1]}&item=${itemLeilao}`)
+					  .then(function(response){
+					    response.json().then(function(data){
+					    	saldo.innerText = `R$ ${data.caixa},00`;
+					    	minimo.innerText = `R$ ${data.min},00`;
+					    	valorMinimo = parseInt((data.min).split(".").join(""));
+					    	valorMaximo = parseInt((data.caixa).split(".").join(""));
+					    	img.setAttribute('src', `${data.link}`);
+					    	img.style.width = "40%";
+					    	img.style.height = "40%";
+					    	nome.innerText = data.item;
+					    	especificacoes.innerText = data.esp;
+					    	tempoInicio = new Date().getTime();
+					    	/*downloadTimer = setInterval(function(){
+							  document.getElementById("progressBar").style.width = `${(30 - timeleft)*3.3}%`;
+							  document.getElementById("timer").innerText = timeleft;
+							  timeleft -= 1;
+							  if(timeleft <= 0)
+							    clearInterval(downloadTimer);
+								check();
+							}, 1000);*/
+
+					    });
+					  })
+					  .catch(function(err){
+					    bootbox.alert({
+						    message: "Falha ao enviar dados ao servidor, tente novamente.",
+						    backdrop: true
+						});
+					  });
+				}
+				else
+				{
+					window.location = `tabela.html?idUser=${chave[1]}`;
+				}
+
+			}
+
+			function check(){
+
+
+				if(timeleft<= 0)
+				{
+					//document.getElementById("progressBar").style.width = '100%';
+					//document.getElementById("timer").innerText = 0;
+					btn.setAttribute('disabled', '');
+					lance.value = 0;
+					fetch(`https://us-central1-leilaouff.cloudfunctions.net/app/registro?userID=${chave[1]}&item=${itemLeilao}&valor=${lance.value}&tempo=${tempoTotal}`)
+					  .then(function(response){
+					    response.json().then(function(data){
+					    		itemLeilao++;
+					    		lance.value = '' ;
+					    		//timeleft = 30;
+					    		//document.getElementById("progressBar").style.width = '0%';
+					    		//document.getElementById("timer").innerText = 30;
+					    		refresh();
+					    					      
+					    });
+					  })
+					  .catch(function(err){
+					    bootbox.alert({
+						    message: "Falha ao enviar dados ao servidor, tente novamente.",
+						    backdrop: true
+						});
+					  });
+				}
+				if(timeleft == 13)
+				{
+					bootbox.alert({
+						    message: "Por favor, preencha seu lance, o tempo está acabando!",
+						    backdrop: true
+						});
+				}
+				if(timeleft == 7)
+				{
+					bootbox.alert({
+						    message: "Por favor, preencha seu lance, o tempo está acabando!",
+						    backdrop: true
+						});
+				}
+				if(timeleft == 3)
+				{
+					bootbox.alert({
+						    message: "Por favor, preencha seu lance, o tempo está acabando!",
+						    backdrop: true
+						});
+				}
+			}
+
+
+
+			$('#lanceId').keyup(function(){
+			    var v = $(this).val();
+			    v=v.replace(/\D/g,'');
+			    v=v.replace(/(\d{1,2})$/, ',$1');  
+			    v=v.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');  
+			    v = v != ''? v:'';
+			    $(this).val(v);
+			});
+
+
+
+
+    </script>
+
+</body>
+</html>

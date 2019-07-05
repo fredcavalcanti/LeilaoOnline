@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<title>Experimento Leilão</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="shortcut icon" type="image/x-icon" href="dist/images/icone.jpg" />
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+
+	<div class="bg-contact2" style="background-image: url('images/bg-01.jpg');">
+		<div class="container-contact2">
+			<div class="wrap-contact2">
+				<center>
+	            <div class="col-md-12 mb-5">
+					<p>Caro participante, nesse momento começam os leilões. Leia as especificações de cada um, o lance mínimo, o seu valor máximo de caixa(o lance limite que pode ser dado para cada leilão) e com o seu conhecimento de mercado, arremate eles.</p>
+					<p><b>E DÊ <label style="color: red">O SEU</label> LANCE COMO SE ESTIVESSE PARTICIPANDO DE UM LEILÃO DE VERDADE, ONDE O DINHEIRO DO CAIXA FOSSE SEU.</b></p>
+					<p>Abaixo um exemplo de como será a tela do leilão:</p>
+					<img style="width:70%;height: 70%" src="dist/images/example.png">
+					<p class="mt-3">Desde já, agradecemos a sua participação e bons lances!!</p>
+	            </div>
+	            </center>
+
+				<div class="container-contact2-form-btn">
+					<div class="wrap-contact2-form-btn">
+						<div class="contact2-form-bgbtn"></div>
+						<button class="contact2-form-btn" id="nextPage">
+							Avançar
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-23581568-13');
+	</script>
+	<script type="text/javascript">
+		$("#nextPage").on("click", a=> {
+	      		a.preventDefault();
+	      		var url = location.href;
+	      		var parametrosDaUrl = url.split("?")[1];
+	      		var listaDeParametros = parametrosDaUrl.split("&");
+	      		var chave = (listaDeParametros[0]).split("=");
+		      	window.location = `leilao.html?key=${chave[1]}`;
+			});
+	</script>
+
+</body>
+</html>

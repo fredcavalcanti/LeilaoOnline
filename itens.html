@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<title>Experimento Leilão</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="shortcut icon" type="image/x-icon" href="dist/images/icone.jpg" />
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+
+	<div class="bg-contact2" style="background-image: url('images/bg-01.jpg');">
+		<div class="container-contact2">
+			<div class="wrap-contact2">
+					<span class="contact2-form-title">
+						Valores de mercado dos objetos:
+					</span>
+					<div class="row">
+				    <div class="col-sm">
+				      <div class="col-md-12">
+				      	<center>
+							<h5>Relógio Breitling J Class De Ouro </h5>
+							<img style="width: 100%;height: 100%;" src="dist/images/leilao/1.jpg">
+							<p>(Data: 21/12/2018)</p><br>
+							<p>Lojas:</p>
+							<p><b>Chrono 24</b>:<br>R$ 12.526,00</p>
+							<p><b>Mercado Livre</b>:<br>R$ 19.999,00</p>
+							<p><b style="color: red;">Seu lance:</b><br><label id="lance1"></label></p>
+						</center>
+					</div>
+				    </div>
+				    <div class="col-sm">
+				     	<div class="col-md-12">
+				     	<center>
+							<h5>Iphone 7</h5>
+							<img style="width: 100%;height: 100%;" src="dist/images/leilao/2.jpg">
+							<p>(Data: 12/12/2018)</p>
+							<br>
+							<p>Lojas:</p>
+							<p><b>Apple</b>: <br>R$ 3.199,00</p>
+							<p><b>Casas Bahia</b>:   <br>R$ 2.879,00</p>
+							<p><b>Americanas</b>: <br>R$ 2.887.78</p>
+							<p><b style="color: red;">Seu lance:</b><br><label id="lance2"></label></p>
+						</center>
+					</div>
+				    </div>
+				    <div class="col-sm">
+				      <div class="col-md-12">
+				      	<center>
+							<h5>Obra de Arte – Sem Título</h5>
+							<img style="width: 100%;height: 100%;" src="dist/images/leilao/3.jpg">
+							<p>Valor arrematado da Obra no <b>Leilão em 2017</b>: US$ 110.500.000,00 (torno de R$ 373.490.000,00)</p>
+							<p><b style="color: red;">Seu lance:</b><br><label id="lance3"></label></p>
+						</center>
+					</div>	
+				    </div>
+				  </div>
+
+					<div class="container-contact2-form-btn">
+						<div class="wrap-contact2-form-btn">
+							<div class="contact2-form-bgbtn"></div>
+							<button class="contact2-form-btn" id="nextPage">
+								Avançar
+							</button>
+						</div>
+					</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-23581568-13');
+	</script>
+	<script type="text/javascript">
+	      	var url = location.href;
+      		var parametrosDaUrl = url.split("?")[1];
+      		var listaDeParametros = parametrosDaUrl.split("&");
+      		var chave = (listaDeParametros[0]).split("=");
+			const lance1 = $('#lance1');
+			const lance2 = $('#lance2');
+			const lance3 = $('#lance3');
+	      	fetch(`https://us-central1-leilaouff.cloudfunctions.net/app/dados?userID=${chave[1]}`)
+					  .then(function(response){
+					    response.json().then(function(data){
+					    	lance1[0].innerText = `R$ ${pontos(data.itens.lance1.lance)},00`;	
+					    	lance2[0].innerText = `R$ ${pontos(data.itens.lance2.lance)},00`;	
+					    	lance3[0].innerText = `R$ ${pontos(data.itens.lance3.lance)},00`;	
+					    	
+					    	if(data.itens.lance1.lance > 2750)
+					    	{
+					    		lance1[0].innerText += ` (Arrematado)`;
+					    	}
+
+					    	if(data.itens.lance2.lance > 2100)
+					    	{
+					    		lance2[0].innerText += ` (Arrematado)`;;
+					    	}
+
+
+					    	if(data.itens.lance3.lance > 373490000)
+					    	{
+					    		lance3[0].innerText += ` (Arrematado)`;
+					    	}
+					    	
+					    });
+					  })
+					  .catch(function(err){
+					    alert('Falha ao enviar dados ao servidor, tente novamente.');
+					  });
+
+
+	      	$("#nextPage").on("click", a=> {
+	      		a.preventDefault();
+	      		var url = location.href;
+	      		var parametrosDaUrl = url.split("?")[1];
+	      		var listaDeParametros = parametrosDaUrl.split("&");
+	      		var chave = (listaDeParametros[0]).split("=");
+		      	window.location = `quest.html?key=${chave[1]}`;
+    		});
+
+    		function pontos(valor){
+			    var v = valor;
+			    v=v.replace(/\D/g,'');
+			    //v=v.replace(/(\d{1,2})$/, ',$1');  
+			    v=v.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');  
+			    v = v != ''? v:'';
+			    return v;
+			};
+    </script>
+
+</body>
+</html>

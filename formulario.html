@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<title>Experimento Leilão</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="shortcut icon" type="image/x-icon" href="dist/images/icone.jpg" />
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+
+	<div class="bg-contact2" style="background-image: url('images/bg-01.jpg');">
+		<div class="container-contact2">
+			<div class="wrap-contact2">
+				<form class="contact2-form">
+					<span class="contact2-form-title">
+						Formulário
+					</span>
+					<!----------------------------------------------------------------------------------->
+					<label>1. Gênero<label style="color: red">*</label></label>
+					<div class="form-check">
+					  <input type="radio" name="genero" id="blankRadio1" value="masculino" checked>
+						<label class="form-check-label">Masculino</label>
+					</div>
+					<div class="form-check">
+					  <input type="radio" name="genero" id="blankRadio2" value="feminino" aria-label="...">
+						<label class="form-check-label">Feminino</label>
+					</div>
+					<div class="form-check">
+					  <input type="radio" name="genero" id="blankRadio3" value="outros" aria-label="...">
+						<label class="form-check-label">Outros</label>
+					</div>
+					<!----------------------------------------------------------------------------------->
+					<br>
+					<!----------------------------------------------------------------------------------->
+
+					<div class="wrap-input2">
+						<input id="idadeId" class="input2" type="text">
+						<span class="focus-input2" data-placeholder="2. Idade*"></span>
+					</div>
+					<!----------------------------------------------------------------------------------->
+					<div class="wrap-input2">
+						<input id="universidadeId" class="input2" type="text">
+						<span class="focus-input2" data-placeholder="3. Universidade*"></span>
+					</div>
+					<!----------------------------------------------------------------------------------->
+					<div class="wrap-input2">
+						<input id="cursoId" class="input2" type="text">
+						<span class="focus-input2" data-placeholder="4. Curso*"></span>
+					</div>
+					<!----------------------------------------------------------------------------------->
+					<label>5. Período</label><label style="color: red">*</label><br>
+				      <select class="custom-select mr-sm-2" id="periodoId">
+				        <option value="1" selected>1</option>
+				        <option value="2">2</option>
+				        <option value="3">3</option>
+				        <option value="4">4</option>
+				        <option value="5">5</option>
+				        <option value="6">6</option>
+				        <option value="7">7</option>
+				        <option value="8">8</option>
+				        <option value="9">9</option>
+				        <option value="10">10</option>
+				      </select>
+				      <br><br>
+				   	<!----------------------------------------------------------------------------------->
+				   	<label class="mt-3" style="margin-bottom: -10%">6. Já participou de algum leilão?<label style="color: red">*</label></label>
+					<div class="form-check">
+					  <input type="radio" name="participou" id="participaId" value="true" checked>
+						<label class="form-check-label">Sim</label>
+					</div>
+					<div class="form-check">
+					  <input type="radio" name="participou" id="participaId" value="false" aria-label="...">
+						<label class="form-check-label">Não</label>
+					</div>
+					<!----------------------------------------------------------------------------------->
+					<label class="mt-3" style="margin-bottom: -10%">7. Se sim, qual modalidade de leilão?</label>
+					<div class="form-check">
+					  <input type="radio" name="modalidade" id="modalidadeId" value="online">
+						<label class="form-check-label">Online</label>
+					</div>
+					<div class="form-check">
+					  <input type="radio" name="modalidade" id="modalidadeId" value="presencial">
+						<label class="form-check-label">Presencial</label>
+					</div>
+					<br>
+					<!----------------------------------------------------------------------------------->
+					<div class="wrap-input2">
+						<input id="tipoId" class="input2" type="text">
+						<span class="focus-input2" data-placeholder="8. Qual tipo de leilão?"></span>
+					</div>
+					<!----------------------------------------------------------------------------------->
+					<div class="container-contact2-form-btn">
+						<div class="wrap-contact2-form-btn">
+							<div class="contact2-form-bgbtn"></div>
+							<button class="contact2-form-btn">
+								Avançar
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+
+
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-23581568-13');
+	</script>
+	<script type="text/javascript">
+	      	$("form").on("submit", a=> {
+	      		a.preventDefault();
+
+	      		let botao = $('.contact2-form-btn');
+	      		let genero = $("input[name='genero']:checked").val();
+				let idade = $("#idadeId").val();
+				let universidade = $("#universidadeId").val();
+				let curso = $("#cursoId").val();
+				let periodo = $("#periodoId").val();
+				let participou = $("input[name='participou']:checked").val();
+				let modalidade =  $("input[name='modalidade']:checked").val();
+				let tipo =  $("#tipoId").val();
+
+				if( genero && idade && universidade && curso && periodo && participou)
+				{
+					if(participou == "true")
+					{
+						if(genero && idade && universidade && curso && periodo && participou && modalidade && tipo)
+						{
+							botao.innerText = 'Aguarde...';
+							botao.attr('disabled','');
+
+							fetch(`https://us-central1-leilaouff.cloudfunctions.net/app/newPlayer?genero=${genero}&idade=${idade}&universidade=${universidade}&curso=${curso}&periodo=${periodo}&participou=${participou}&modalidade=${modalidade}&tipo=${tipo}`)
+					  .then(function(response){
+					    response.json().then(function(data){
+					      	window.location = `proc.html?key=${data.key}`;
+					      	botao.innerText = 'Avançar';
+							botao.removeAttr('disabled');			      
+					    });
+					  })
+					  .catch(function(err){
+					    alert("Falha ao enviar dados ao servidor, tente novamente.");
+					    botao.innerText = 'Avançar';
+						botao.removeAttr('disabled');	
+					  });
+
+						}
+						else
+						{
+							alert("Preencha todos dados obrigatórios.");
+						}
+					}
+					else
+					{
+						botao.innerText = 'Aguarde...';
+						botao.attr('disabled','');
+
+						fetch(`https://us-central1-leilaouff.cloudfunctions.net/app/newPlayer?genero=${genero}&idade=${idade}&universidade=${universidade}&curso=${curso}&periodo=${periodo}&participou=${participou}&modalidade=${modalidade}&tipo=${tipo}`)
+					  .then(function(response){
+					    response.json().then(function(data){
+					      			window.location = `proc.html?key=${data.key}`;					      
+					    });
+					  })
+					  .catch(function(err){
+					    alert("Falha ao enviar dados ao servidor, tente novamente.");
+					    botao.innerText = 'Avançar';
+						botao.removeAttr('disabled');
+					  });
+
+					}
+					
+				}
+				else
+				{
+					alert("Preencha todos dados obrigatórios.");
+				}	     	
+    	});
+    </script>
+</body>
+</html>

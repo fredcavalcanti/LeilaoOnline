@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<title>Experimento Leilão</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="shortcut icon" type="image/x-icon" href="dist/images/icone.jpg" />
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+
+	<div class="bg-contact2" style="background-image: url('images/bg-01.jpg');">
+		<div class="container-contact2">
+			<div class="wrap-contact2">
+					<span class="contact2-form-title">
+						Procedimentos e Regras:
+					</span>
+					<div class="col-md-12 mb-5" style="text-align: center;">
+						<p>Vamos lá,</p>
+						<p>Esse experimento é uma simulação de leilão fechado de 1º preço, quer dizer que você terá que dar <b>UM LANCE APENAS</b> para cada objeto e ganha quem der o maior lance, os lances dos outros participantes só serão visualizados ao final do experimento.</p>
+						<p>Você estará jogando com um computador, não é online, mas os lances dados pelo computador são lances verdadeiros, onde seus valores foram pesquisados no mercado.</p>
+						<p><b style="color: red">O experimento consiste em 3 LEILÕES, onde em cada um, você receberá um valor para dar os lances e também aparecerá um valor mínimo por cada lance. </b></p>
+						<p>Serão 3 objetos diferentes:</p>
+						<p>O primeiro objeto será um Relógio Unissex, onde seu valor de mercado não será informado.</p>
+						<p>O segundo objeto será um Iphone 7 e o seu valor de mercado não será informado.</p>
+						<p>O terceiro objeto será uma obra de arte (do autor Basquiat) e o seu valor de mercado não será informado.</p>
+						<p>Participante, <b>NÃO PESQUISEM SOBRE OS ITENS</b>, durante o leilão, utilizem informações já coletadas durante a vida acadêmica.</p>
+						<p>Participante, seja o mais honesto possível: se imagine <b>PARTICIPANDO DE LEILÃO DE VERDADE</b>, onde o dinheiro dos lances seria o <b>SEU</b>.</p>
+		            </div>
+		            </center>
+		            <div class="col-md-12 mt-5">
+		            	<h5>Para entendimento de como será o experimento:</h5><br>
+		            	<p>Exemplo: Em um leilão fechado de 1º preço, três participantes, José, Lucas e Vitor, dão seus respectivos lances: R$3.000,00, R$2.950.00 e R$3.245,00, para arrematar um MacBook. Qual deles levaria o leilão?
+						</p>
+						<div class="form-check" style="margin-top: 2%">
+						  <input type="radio" name="pessoa" id="blankRadio1" value="option1" checked>
+							<label class="form-check-label">Jose</label>
+						</div>
+						<div class="form-check">
+						  <input type="radio" name="pessoa" id="blankRadio2" value="option2" aria-label="...">
+							<label class="form-check-label">Lucas</label>
+						</div>
+						<div class="form-check">
+						  <input type="radio" name="pessoa" id="blankRadio3" value="option3" aria-label="...">
+							<label class="form-check-label">Vitor</label>
+						</div>
+		            </div>
+		           	<br>
+					<div class="container-contact2-form-btn">
+						<div class="wrap-contact2-form-btn">
+							<div class="contact2-form-bgbtn"></div>
+							<button class="contact2-form-btn" id="nextPage">
+								Avançar
+							</button>
+						</div>
+					</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-23581568-13');
+	</script>
+	<script type="text/javascript">
+	      	$("#nextPage").on("click", a=> {
+	      		a.preventDefault();	      		
+	      		let pessoa = $("input[name='pessoa']:checked").val();
+	      		if(pessoa == "option3")
+	      		{
+	      			var url = location.href;
+		      		var parametrosDaUrl = url.split("?")[1];
+		      		var listaDeParametros = parametrosDaUrl.split("&");
+		      		var chave = (listaDeParametros[0]).split("=");
+			      	window.location = `wel.html?key=${chave[1]}`;
+	      		}
+	      		else
+	      		{
+	      			alert('Seleciona a pessoa correta por favor.');
+	      		}
+	      		
+    	});
+    </script>
+
+</body>
+</html>

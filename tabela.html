@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<title>Experimento Leilão</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="shortcut icon" type="image/x-icon" href="dist/images/icone.jpg" />
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+
+	<div class="bg-contact2" style="background-image: url('images/bg-01.jpg');">
+		<div class="container-contact2">
+			<div class="wrap-contact2">
+				<form class="contact2-form validate-form">
+					<span class="contact2-form-title">
+						FIM DOS LANCES!!!
+					</span>
+	                <h4>Abaixo segue os ganhadores e seus lances dados.</h4>
+	                <h5>Espero que tenha arrematados os objetos e que tenha se dado bem!!</h5>
+	                <br>
+					<!----------------- 
+					<h4 style="text-align: center;">Ganhador:</h4><br>----------->
+					 <table class="table">
+					  <thead>
+					    <tr>
+					      <th scope="col">Item</th>
+					      <th scope="col">Ganhador</th>
+					      <th scope="col">Valor Vencedor</th>
+					      <th scope="col">Seu lance</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr>
+					      <th scope="row">Relógio</th>
+					      <td id="winner1"></td>
+					      <td id="winnerMoney1"></td>
+					      <td id="lance1"></td>
+					    </tr>
+					    <tr>
+					      <th scope="row">Iphone 7</th>
+					      <td id="winner2"></td>
+					      <td id="winnerMoney2"></td>
+					      <td id="lance2"></td>
+					    </tr>
+					    <tr>
+					      <th scope="row">Obra de Arte</th>
+					      <td id="winner3"></td>
+					      <td id="winnerMoney3"></td>
+					      <td id="lance3"></td>
+					    </tr>
+					  </tbody>
+					</table>
+					<br>	
+					<!----------------- 
+					<h4 style="text-align: center;">Lance x Lance:</h4><br>
+					<table class="table">
+					  <thead>
+					    <tr>
+					      <th scope="col">Item</th>
+					      <th scope="col">Valor Vencedor</th>
+					      <th scope="col">Seu lance</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr>
+					      <th scope="row">Relógio</th>
+					      <td id="winnerMoney1"></td>
+					      <td id="lance1"></td>
+					    </tr>
+					    <tr>
+					      <th scope="row">Iphone 7</th>
+					      <td id="winnerMoney2"></td>
+					      <td id="lance2"></td>
+					    </tr>
+					    <tr>
+					      <th scope="row">Obra de Arte</th>
+					      <td id="winnerMoney3"></td>
+					      <td id="lance3"></td>
+					    </tr>
+					  </tbody>
+					</table>
+					<br>
+					 
+					<h4 style="text-align: center;">Lances:</h4><br>
+					<table class="table">
+					  <thead>
+					    <tr>
+					      <th scope="col">Item</th>
+					      <th scope="col">Lance PC 1</th>
+					      <th scope="col">Lance PC 2</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr>
+					      <th scope="row">Relógio</th>
+					      <td>R$ 2.750,00</td>
+					      <td>R$ 2.710,00</td>
+					    </tr>
+					    <tr>
+					      <th scope="row">Iphone 7</th>
+					      <td>R$ 1.903,00</td>
+					      <td>R$ 2.100,00</td>
+					    </tr>
+					    <tr>
+					      <th scope="row">Obra de Arte</th>
+					      <td>R$ 270.400.000,00</td>
+					      <td>R$ 331.240.000,00</td>
+					    </tr>
+					  </tbody>
+					</table>
+					<table class="table">
+					  <thead>
+					    <tr>
+					      <th scope="col">Item</th>
+					      <th scope="col">Lance PC 3</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr>
+					      <th scope="row">Relógio</th>
+					      <td>R$ 2.620,00</td>
+					    </tr>
+					    <tr>
+					      <th scope="row">Iphone 7</th>
+					      <td>R$ 1.700,00</td>
+					    </tr>
+					    <tr>
+					      <th scope="row">Obra de Arte</th>
+					      <td>R$ 373.490.000,00</td>
+					    </tr>
+					  </tbody>
+					</table>
+----------->
+
+					<div class="container-contact2-form-btn">
+						<div class="wrap-contact2-form-btn">
+							<div class="contact2-form-bgbtn"></div>
+							<button class="contact2-form-btn"  id="nextPage">
+								Avançar
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+
+
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-23581568-13');
+	</script>
+	<script src="js/bootbox.all.min.js"></script>
+	<script type="text/javascript">
+	      	var url = location.href;
+      		var parametrosDaUrl = url.split("?")[1];
+      		var listaDeParametros = parametrosDaUrl.split("&");
+      		var chave = (listaDeParametros[0]).split("=");
+			const winner1 = $('#winner1');
+			const winner2 = $('#winner2');
+			const winner3 = $('#winner3');
+			const winnerMoney1 = $('#winnerMoney1');
+			const winnerMoney2 = $('#winnerMoney2');
+			const winnerMoney3 = $('#winnerMoney3');
+			const lance1 = $('#lance1');
+			const lance2 = $('#lance2');
+			const lance3 = $('#lance3');
+
+
+			fetch(`https://us-central1-leilaouff.cloudfunctions.net/app/dados?userID=${chave[1]}`)
+					  .then(function(response){
+					    response.json().then(function(data){
+					    	lance1[0].innerText = `R$ ${pontos(data.itens.lance1.lance)},00`;	
+					    	lance2[0].innerText = `R$ ${pontos(data.itens.lance2.lance)},00`;	
+					    	lance3[0].innerText = `R$ ${pontos(data.itens.lance3.lance)},00`;	
+					    	
+					    	if(data.itens.lance1.lance > 2750)
+					    	{
+					    		winner1[0].innerHTML = `<h6 style="color:red">Você</h6>`;
+					    		winnerMoney1[0].innerText = `R$ ${pontos(data.itens.lance1.lance)},00`;
+					    	}
+					    	else
+					    	{
+					    		winner1[0].innerText = `PC 1`;
+					    		winnerMoney1[0].innerText = `R$ 2.750,00`;
+					    	}
+
+					    	if(data.itens.lance2.lance > 2100)
+					    	{
+					    		winner2[0].innerHTML = `<h6 style="color:red">Você</h6>`;
+					    		winnerMoney2[0].innerText = `R$ ${pontos(data.itens.lance2.lance)},00`;
+					    	}
+					    	else
+					    	{
+					    		winner2[0].innerText = `PC 2`;
+					    		winnerMoney2[0].innerText = `R$ 2.100,00`;
+					    	}
+
+
+					    	if(data.itens.lance3.lance > 373490000)
+					    	{
+					    		winner3[0].innerHTML = `<h6 style="color:red">Você</h6>`;
+					    		winnerMoney3[0].innerText = `R$ ${pontos(data.itens.lance3.lance)},00`;
+					    	}
+					    	else
+					    	{
+					    		winner3[0].innerText = `PC 3`;
+					    		winnerMoney3[0].innerText = `R$ 373.490.000,00`;
+					    	}
+					    	
+					    });
+					  })
+					  .catch(function(err){
+					    bootbox.alert({
+						    message: "Falha ao enviar dados ao servidor, tente novamente.",
+						    backdrop: true
+						});
+					  });
+
+
+	      	$("#nextPage").on("click", a=> {
+	      		a.preventDefault();
+		      	window.location = `itens.html?key=${chave[1]}`;
+    	});
+
+
+	      	function pontos(valor){
+			    var v = valor;
+			    v=v.replace(/\D/g,'');
+			    //v=v.replace(/(\d{1,2})$/, ',$1');  
+			    v=v.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');  
+			    v = v != ''? v:'';
+			    return v;
+			};
+    </script>
+
+</body>
+</html>
