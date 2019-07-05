@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<title>Experimento Leilão</title>
+	<link rel="shortcut icon" type="image/x-icon" href="../../dist/images/icone.jpg" />
+	<link href="../../dist/css/vendor/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="background-color: white;">	
+
+	  	<center>
+
+                <h2>Tabela de Dados</h2>
+                   <a href="javascript:tableToExcel('tabelaDados', 'Dados');" id="download" class="btn btn-success mr-5 disabled" >Baixar</a>
+                <table class="table" id="tabelaDados">
+				  <thead>
+				    <tr>
+				      <th scope="col">Genero</th>
+				      <th scope="col">Idade</th>
+				      <th scope="col">Universidade</th>
+				      <th scope="col">Curso</th>
+				      <th scope="col">Período</th>
+				      <th scope="col">Já participou de algum leilão?</th>
+				      <th scope="col">Se sim, qual modalidade de leilão?</th>
+				      <th scope="col">Qual tipo de leilão?</th>
+				      <th scope="col">Você está satisfeito com o valor arrematado dos objetos?</th>
+				      <th scope="col">Depois de saber o valor de todos os objetos você ficou satisfeito com o valor arrematado?</th>
+				      <th scope="col">Qual dos 3 bens você ficou mais satisfeito com o arremate?</th>
+				      <th scope="col">Você tinha algum conhecimento de leilão?</th>
+				      <th scope="col">Você tinha conhecimento dos valores dos bens leiloados?</th>
+				      <th scope="col">O que mais influenciou na hora do lance?</th>
+				      <th scope="col">Já ouviu falar sobre o termo Maldição do Vencedor?</th>
+				      <th scope="col">Você acha que caiu na Maldição do Vencedor?</th>
+				      <th scope="col">Lance 1</th>
+				      <th scope="col">Lance 2</th>
+				      <th scope="col">Lance 3</th>
+				      <th scope="col">Tempo Lance 1 (Segundos)</th>
+				      <th scope="col">Tempo Lance 2 (Segundos)</th>
+				      <th scope="col">Tempo Lance 3 (Segundos)</th>
+				    </tr>
+				  </thead>
+				  <tbody id="bodyDados">
+				    
+				  </tbody>
+				</table>
+
+
+            </center>
+	  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	      <script src="../../dist/scripts/jquery-3.3.1.min.js"></script>
+	      <!-- Bootstrap 4 requires Popper.js -->
+	      <script src="../../dist/scripts/popper.min.js" crossorigin="anonymous"></script>
+	      <script type="text/javascript">
+	      	const tbody = document.getElementById('bodyDados');
+	      	const btn = document.getElementById('download');
+			fetch(`https://us-central1-leilaouff.cloudfunctions.net/app/dadosCompletos`)
+					  .then(function(response){
+					    response.json().then(function(data){
+					    	var x = Object.values(data);
+					    	console.log(x)
+					    	for(i=0;i<x.length;i++)
+					    	{
+					    		if(x[i].questionario && x[i].itens)
+					    		{
+					    			let k = Object.values(x[i].questionario);
+					    			let j = Object.values(x[i].itens);
+					    			if(x[i].genero && x[i].idade && x[i].universidade && x[i].curso && x[i].periodo && x[i].participou && x[i].modalidade && x[i].tipo && k[6] && k[7] && k[0] && k[2] && k[3] && k[4] && k[5] && k[1] && j[0].lance && j[1].lance && j[2].lance && j[0].tempo && j[1].tempo && j[2].tempo) {
+					    				tbody.innerHTML += `<tr><td>${x[i].genero}</td><td>${x[i].idade}</td><td>${x[i].universidade}</td><td>${x[i].curso}</td><td>${x[i].periodo}</td><td>${x[i].participou}</td><td>${x[i].modalidade}</td><td>${x[i].tipo}</td><td>${k[6]}</td><td>${k[7]}</td><td>${k[0]}</td><td>${k[2]}</td><td>${k[3]}</td><td>${k[4]}</td><td>${k[5]}</td><td>${k[1]}</td><td>${pontos(j[0].lance)},00</td><td>${pontos(j[1].lance)},00<td>${pontos(j[2].lance)},00</td><td>${parseInt((j[0].tempo)/1000)}</td><td>${parseInt((j[1].tempo)/1000)}</td><td>${parseInt((j[2].tempo)/1000)}</td></tr>`;
+					    			}
+					    		}
+					    		
+					    	}
+					    	btn.setAttribute('class','btn btn-success mr-5');
+					    });
+					  })
+					  .catch(function(err){
+					    alert("Falha ao enviar dados ao servidor, tente novamente.");
+					  });
+
+
+
+			 var tableToExcel = (function() {
+			  var uri = 'data:application/vnd.ms-excel;base64,'
+			    , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+			    , base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) }
+			    , format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
+			  return function(table, name) {
+			    if (!table.nodeType) table = document.getElementById(table)
+			    var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+			    var downloadName = prompt("Escolha um nome para exportar:", "Minha Tabela");
+			    if(downloadName){
+			    var link = document.createElement("a");
+			    link.download = downloadName + ".xls";
+			    link.href = uri + base64(format(template, ctx));
+			    link.click();
+			    }
+			    else
+			    {
+			    	return;
+			    }
+			  }
+			})()
+
+
+			function pontos(valor){
+			    var v = valor;
+			    v=v.replace(/\D/g,'');
+			    //v=v.replace(/(\d{1,2})$/, ',$1');  
+			    v=v.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');  
+			    v = v != ''? v:'';
+			    return v;
+			};
+    </script>
+</body>
+</html>
