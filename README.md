@@ -9,4 +9,4 @@ OBS: Para utilizar é nescessário linkar seu firebase.
 
 Caminhos dos arquivos: /js/main.js  &  /adm/experimentos/js/main.js
 
-##Autor : Frederico Sampaio
+## Autor : Frederico Sampaio
